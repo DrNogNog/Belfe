@@ -3,8 +3,10 @@ export const LIP_COLORS = [
   //Please update the Menu's for any ID changes to split colors correctly for the face part cosmetic innovations (other types of products).
   //Just use Cursor and AI to add colors and update all the numbers, when adding a new colors, and use prompt above.
   
+
+  //colorid, colortag, colorname, colorcount
   //Products Color
-  { id: '0', color: '#FF0000', name: 'Red', count: 82 },
+  { id: '100', color: '#FF0000', name: 'Red', count: 82 },
   /////////////////////
   //LipStick Colors \\
   /////////////////////

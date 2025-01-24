@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, Star, Palette, Building2, Heart, ShoppingBag, DollarSign, Users } from 'lucide-react';
 import { RatingSystem } from '../RatingSystem';
@@ -8,6 +8,18 @@ import { PriceRangeMenu } from '../PriceRangeMenu';
 import { AgeRangeMenu } from '../AgeRangeMenu';
 import { ColorPicker } from '../ColorPicker';
 import { ProductList } from './ProductList';
+
+const COLORS = [
+  { id: '1', color: '#FF69B4', name: 'Pink', count: 88 },
+  { id: '2', color: '#FFE4C4', name: 'Nude', count: 83 },
+  { id: '3', color: '#FF0000', name: 'Red', count: 82 },
+  { id: '4', color: '#800000', name: 'Berry', count: 54 },
+  { id: '5', color: '#FF4500', name: 'Coral', count: 36 },
+  { id: '6', color: '#FFA500', name: 'Orange', count: 9 },
+  { id: '7', color: '#DEB887', name: 'Universal', count: 4 },
+  { id: '8', color: '#800080', name: 'Purple', count: 4 },
+  { id: '9', color: 'transparent', name: 'Clear', count: 1 }
+];
 
 interface MakeupOptionsMenuProps {
   title: string;
@@ -25,11 +37,7 @@ export function MakeupOptionsMenu({ title, onBack, products }: MakeupOptionsMenu
   const [showPriceRange, setShowPriceRange] = useState(false);
   const [showAgeRange, setShowAgeRange] = useState(false);
 
-  const handleRatingChange = (rating: number) => {
-    console.log('Selected rating:', rating);
-    setShowRating(false);
-  };
-
+  
   const handleBack = () => {
     if (currentView !== 'main') {
       setCurrentView('main');
@@ -37,7 +45,11 @@ export function MakeupOptionsMenu({ title, onBack, products }: MakeupOptionsMenu
       onBack();
     }
   };
-
+  const handleRatingChange = (rating: number) => {
+    console.log('Selected rating:', rating);
+    setShowRating(false);
+  };
+  
   const closeAllMenus = () => {
     setShowRating(false);
     setShowConcerns(false);
@@ -48,7 +60,9 @@ export function MakeupOptionsMenu({ title, onBack, products }: MakeupOptionsMenu
 
   if (currentView === 'colorFamily') {
     return (
-      <ColorPicker 
+      <ColorPicker
+        title = {title}
+        colors = {COLORS}
         onBack={() => setCurrentView('main')}
         onColorSelect={() => setCurrentView('products')}
       />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MakeupOptionsMenu } from '../shared/MakeupOptionsMenu';
 import { blushProducts } from './products/blushProducts';
 

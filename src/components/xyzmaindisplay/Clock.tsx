@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 
@@ -21,7 +21,7 @@ export function Clock() {
       className="pl-8 pt-4"
     >
       {/* Date */}
-      <div className="text-lg font-light mb-1">
+      <div className="text-2xl font-light mb-1">
         {format(time, 'EEEE, MMMM do, yyyy')}
       </div>
 

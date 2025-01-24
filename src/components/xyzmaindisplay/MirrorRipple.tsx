@@ -1,5 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { BottomNav } from './BottomNav';
+import { Calendar } from './Calendar';
+import { Clock } from './Clock';
+import { Weather } from './Weather';
 
 interface MirrorRippleProps {
   isActive: boolean;
@@ -104,12 +108,32 @@ export function MirrorRipple({ isActive }: MirrorRippleProps) {
   }, [isActive]);
 
   return (
-    <motion.canvas
-      ref={canvasRef}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: isActive ? 1 : 0 }}
-      className="fixed inset-0 w-full h-full bg-black"
-      style={{ mixBlendMode: 'screen' }}
-    />
+    <div className="relative h-screen">
+      {/* Motion Canvas */}
+      <motion.canvas
+        ref={canvasRef}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isActive ? 1 : 0 }}
+        className="fixed inset-0 w-full h-full bg-black"
+        style={{ mixBlendMode: 'screen' }}
+      />
+      
+      {/* Clock */}
+      <div className="absolute top-0 mt-4 left-[23px] top-[25px]">
+        <Clock />
+      </div>
+  
+      {/* Calendar */}
+      <div className="absolute top-[173px] ml-[35px]">
+        <Calendar />
+      </div>
+      <div className="left-[1000px]">
+        <Weather/>
+      </div>
+      {/* Bottom Navigation */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+        <BottomNav showMakeupButton={true} />
+      </div>
+    </div>
   );
-}
+}  

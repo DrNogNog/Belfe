@@ -1,13 +1,10 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 interface BottomNavProps {
-  onMirrorClick: () => void;
-  onMakeupClick: () => void;
   showMakeupButton: boolean;
 }
-
-export function BottomNav({ onMirrorClick, onMakeupClick, showMakeupButton }: BottomNavProps) {
+//onMirrorClick, onMakeupClick,
+export function BottomNav({  showMakeupButton }: BottomNavProps) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -16,8 +13,7 @@ export function BottomNav({ onMirrorClick, onMakeupClick, showMakeupButton }: Bo
       className="flex justify-center gap-24"
     >
       {/* Mirror Button */}
-      <button 
-        onClick={onMirrorClick}
+      <button
         className="flex flex-col items-center text-white/80 hover:text-white transition-colors"
       >
         <svg 
@@ -38,7 +34,6 @@ export function BottomNav({ onMirrorClick, onMakeupClick, showMakeupButton }: Bo
       {/* Makeup Button */}
       {showMakeupButton && (
         <button 
-          onClick={onMakeupClick}
           className="flex flex-col items-center text-white/80 hover:text-white transition-colors"
         >
           <svg 

@@ -1,18 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { lipstickProducts } from './products/lipstickProducts';
+import { Product } from '../../types/products';
 
 interface LipstickProductViewProps {
-  onBackToMenu?: () => void; // Optional back-to-menu callback
-  onColorSelect?: (color: string) => void; // Optional color select callback
+  products: Product[];
+  onBack: (x: string) => void;
+  onColorSelect: (color: string) => void;
+  title: string;
 }
 
-export function LipstickProductView({
-  onBackToMenu = () => {},
-  onColorSelect = () => {},
-  }: LipstickProductViewProps) {
-
+export function LipstickProductView({ 
+  products, 
+  onBack, 
+  onColorSelect,
+  title 
+}: LipstickProductViewProps) {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -28,10 +31,10 @@ export function LipstickProductView({
       <div className="flex justify-center mb-2">
         <div className="bg-black/90 py-2 px-4 w-[95%] max-w-3xl rounded-[35px]">
           <div className="flex items-center gap-8">
-            <button onClick={onBackToMenu} className="p-1">
+            <button onClick={() => onBack('0')} className="p-1">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <span>Color Family</span>
+            <span>{title}</span>
             <span>Brand</span>
             <span>Brand</span>
           </div>
@@ -59,7 +62,10 @@ export function LipstickProductView({
               ref={scrollContainerRef}
               className="flex overflow-x-auto hide-scrollbar gap-4 px-6"
             >
-              {lipstickProducts.map((product) => (
+              {products.map((product) => (
+                <button
+                onClick={() => onColorSelect(product.colorid)}
+                >
                 <div key={product.id} className="flex-none w-[100px]">
                   <img
                     src={product.image}
@@ -76,8 +82,12 @@ export function LipstickProductView({
                       <div className="text-yellow-400">{'★'.repeat(Math.floor(product.rating))}</div>
                       <span className="text-gray-500">{product.reviews}</span>
                     </div>
+                    {product.shipping && (
+                      <p className="text-gray-500 mt-0.5">{product.shipping}</p>
+                    )}
                   </div>
                 </div>
+                </button>
               ))}
             </div>
 

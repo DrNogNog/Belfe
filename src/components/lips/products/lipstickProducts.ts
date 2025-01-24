@@ -8,7 +8,7 @@ export const lipstickProducts = [
     reviews: '(22k+)',
     retailer: 'Sephora',
     image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=100&q=80',
-    color: '0'
+    color: '100'
   },
   {
     id: 'ls2',
@@ -19,7 +19,7 @@ export const lipstickProducts = [
     reviews: '(15k+)',
     retailer: 'Glossier',
     image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=100&q=80',
-    color: '0'
+    color: '100'
   },
   {
     id: 'ls3',
@@ -30,6 +30,6 @@ export const lipstickProducts = [
     reviews: '(10k+)',
     retailer: 'Dior',
     image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=100&q=80',
-    color: '0'
+    color: '100'
   }
 ];

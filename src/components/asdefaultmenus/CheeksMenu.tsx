@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, Eye, Smile, Heart, User, Scan, Sparkles, Wand2 } from 'lucide-react';
 import { BlushMenu } from "../cheeks/BlushMenu";

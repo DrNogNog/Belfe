@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { MakeupInterface } from './components/MakeupInterface';
-import { MirrorRipple } from './components/effects/MirrorRipple';
+import { useState } from 'react';
+import { MakeupInterface } from './components/xyzmaindisplay/MakeupInterface';
+import { MirrorRipple } from './components/xyzmaindisplay/MirrorRipple';
 
 export default function App() {
   const [showMakeup, setShowMakeup] = useState(false);
@@ -10,12 +10,13 @@ export default function App() {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen bg-[#100F0F] text-white"
       onClick={handleClick}
     >
-      {!showMakeup && <MirrorRipple isActive={true} />}
-      {showMakeup && <MakeupInterface/>}
+      {/* {!showMakeup && <MirrorRipple isActive={true} />} */}
+      {/* {showMakeup && <MakeupInterface/>} */}
+      <MakeupInterface/>
     </div>
   );
 }

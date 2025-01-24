@@ -4,7 +4,6 @@ import { FaceMesh } from "@mediapipe/face_mesh";
 import * as cam from "@mediapipe/camera_utils";
 import { useLipstickColor } from '../lips/LipstickColorContext';
 import { applyLipstickColor, getGradientCase } from './lipstickUtils';
-import { LIP_COLORS } from '../../constants/lipColors';
 
 const FaceMeshVideo: React.FC = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -62,6 +61,9 @@ const FaceMeshVideo: React.FC = () => {
           if (lipstickId >= 1 && lipstickId <= 15) {
             drawLips(canvasCtx, landmarks, lipstickId);
           }
+          else if (lipstickId === 100) {
+            drawLips(canvasCtx, landmarks, lipstickId);
+          }
         }
       }
     }
@@ -69,12 +71,77 @@ const FaceMeshVideo: React.FC = () => {
 
   // Draw lips with intensity normalization and AR color filtering
   const drawLips = (canvasCtx: CanvasRenderingContext2D, landmarks: any, lipstickId: number) => {
-    canvasCtx.beginPath();
+    const lipPath = new Path2D(); // Create a new Path2D for lips
     
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  
     // Upper Lip Landmarks
     const upperLipLandmarks = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291];
     for (let i = 0; i < upperLipLandmarks.length; i++) {
       const point = landmarks[upperLipLandmarks[i]];
+      const x = point.x * canvasCtx.canvas.width;
+      const y = point.y * canvasCtx.canvas.height;
+  
+      // Update bounding box
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+  
+      if (i === 0) {
+        lipPath.moveTo(x, y); // Start path for the upper lip
+      } else {
+        lipPath.lineTo(x, y); // Draw line to each upper lip point
+      }
+    }
+  
+    // Lower Lip Landmarks
+    const lowerLipLandmarks = [61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291];
+    for (let i = 0; i < lowerLipLandmarks.length; i++) {
+      const point = landmarks[lowerLipLandmarks[i]];
+      const x = point.x * canvasCtx.canvas.width;
+      const y = point.y * canvasCtx.canvas.height;
+  
+      // Update bounding box
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+  
+      lipPath.lineTo(x, y); // Draw line to each lower lip point
+    }
+  
+    // Close the path for the lips
+    lipPath.closePath();
+  
+    // Calculate the bounding box dimensions
+    const lipBounds = {
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY
+    };
+  
+    // Get the gradient for the lips
+    const gradientCase = getGradientCase(lipstickId);
+    applyLipstickColor(canvasCtx, gradientCase, lipBounds); // Apply the gradient to the lip path
+  
+    // Fill the lips with the gradient
+    canvasCtx.fill(lipPath); // Apply the gradient to the lips' path
+    
+    // Intensity normalization and color filtering (optional)
+    normalizeAndFilterLips(canvasCtx, landmarks);
+    canvasCtx.globalCompositeOperation = "destination-out";
+    canvasCtx.beginPath();
+    const innerMouthLandmarks = [
+      78, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308,
+      78, 95, 88, 178, 87, 14, 317, 402, 318, 324, 308,
+      
+    ];
+
+    // Draw inner mouth path
+    for (let i = 0; i < innerMouthLandmarks.length; i++) {
+      const point = landmarks[innerMouthLandmarks[i]];
       const x = point.x * canvasCtx.canvas.width;
       const y = point.y * canvasCtx.canvas.height;
       if (i === 0) {
@@ -84,24 +151,12 @@ const FaceMeshVideo: React.FC = () => {
       }
     }
 
-    // Lower Lip Landmarks
-    const lowerLipLandmarks = [61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291];
-    for (let i = 0; i < lowerLipLandmarks.length; i++) {
-      const point = landmarks[lowerLipLandmarks[i]];
-      const x = point.x * canvasCtx.canvas.width;
-      const y = point.y * canvasCtx.canvas.height;
-      canvasCtx.lineTo(x, y);
-    }
-
-    // Close path and apply lipstick color with gradient
-    canvasCtx.closePath();
-    const gradientCase = getGradientCase(lipstickId);
-    applyLipstickColor(canvasCtx, gradientCase);
-    canvasCtx.fill(); // Fill lips with selected gradient color
-
-    // Apply intensity normalization (adjusting shadows, highlights, mid-tones)
-    normalizeAndFilterLips(canvasCtx, landmarks);
+    canvasCtx.closePath(); // Close the inner mouth path
+    canvasCtx.fill(); // Fill the inner mouth
+    canvasCtx.globalCompositeOperation = "source-over";
   };
+  
+  
 
   // Intensity normalization and filtering function
   const normalizeAndFilterLips = (canvasCtx: CanvasRenderingContext2D, landmarks: any) => {
