@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MakeupInterface } from './components/xyzmaindisplay/MakeupInterface';
-import { MirrorRipple } from './components/xyzmaindisplay/MirrorRipple';
+//import { MirrorRipple } from './components/xyzmaindisplay/MirrorRipple';
 
 export default function App() {
   const [showMakeup, setShowMakeup] = useState(false);

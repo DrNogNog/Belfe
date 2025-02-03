@@ -10,8 +10,8 @@ interface FaceMenuProps {
   onEyesClick: () => void;
   onLipClick: () => void;
   onCheeksClick: () => void;
-  onRelaxationClick: () => void;
-  onGenerationClick: () => void;
+  // onRelaxationClick: () => void;
+  // onGenerationClick: () => void;
 }
 
 type SubMenu = 'foundation' | 'concealer' | 'settingpowder' | null;
@@ -21,8 +21,8 @@ export function FaceMenu({
   onEyesClick,
   onLipClick,
   onCheeksClick,
-  onRelaxationClick,
-  onGenerationClick
+  // onRelaxationClick,
+  // onGenerationClick
 }: FaceMenuProps) {
   const [currentSubMenu, setCurrentSubMenu] = useState<SubMenu>(null);
 
@@ -128,7 +128,7 @@ export function FaceMenu({
             </div>
           </div>
 
-          <button 
+          {/* <button 
             onClick={onRelaxationClick}
             className="w-full flex items-center justify-between text-lg"
           >
@@ -148,7 +148,7 @@ export function FaceMenu({
               <span>Generation</span>
             </div>
             <span className="text-xl opacity-60">›</span>
-          </button>
+          </button> */}
 
           <div className="pt-4">
             <button className="w-full flex items-center gap-3 text-lg">

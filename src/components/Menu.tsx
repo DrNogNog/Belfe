@@ -5,11 +5,8 @@ import { LipMenu } from './asdefaultmenus/LipMenu';
 import { EyesMenu } from './asdefaultmenus/EyesMenu';
 import { CheeksMenu } from './asdefaultmenus/CheeksMenu';
 import { FaceMenu } from './asdefaultmenus/FaceMenu';
-import { RelaxationMenu } from './asdefaultmenus/RelaxationMenu';
-import { GenerationMenu } from './asdefaultmenus/GenerationMenu';
 
-type MenuView = 'main' | 'lip' | 'eyes' | 'cheeks' | 'face' | 'relaxation' | 'generation';
-
+type MenuView = 'main' | 'lip' | 'eyes' | 'cheeks' | 'face' 
 
 export default function Menu() {
   const [currentView, setCurrentView] = useState<MenuView>('main');
@@ -26,8 +23,6 @@ export default function Menu() {
     onLipClick: () => setCurrentView('lip'),
     onCheeksClick: () => setCurrentView('cheeks'),
     onFaceClick: () => setCurrentView('face'),
-    onRelaxationClick: () => setCurrentView('relaxation'),
-    onGenerationClick: () => setCurrentView('generation'),
   };
 
   const menus = {
@@ -36,8 +31,6 @@ export default function Menu() {
     eyes: EyesMenu,
     cheeks: CheeksMenu,
     face: FaceMenu,
-    relaxation: RelaxationMenu,
-    generation: GenerationMenu
   };
 
   const MenuComponent = menus[currentView];

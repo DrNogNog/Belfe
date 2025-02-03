@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Eye, Smile, Heart, User, Scan, Sparkles, Wand2 } from 'lucide-react';
+import { ChevronLeft, Eye, Smile, Heart, User, Scan } from 'lucide-react';
 import { LipstickMenu } from '../lips/LipstickMenu';
 import { LipGlossMenu } from '../lips/LipGlossMenu';
 import { LipOilMenu } from '../lips/LipOilMenu';
@@ -22,8 +22,8 @@ export function LipMenu({
   onEyesClick,
   onCheeksClick,
   onFaceClick,
-  onRelaxationClick,
-  onGenerationClick
+  // onRelaxationClick,
+  // onGenerationClick
 }: LipMenuProps) {
   const [currentSubMenu, setCurrentSubMenu] = useState<SubMenu>(null);
 
@@ -139,28 +139,6 @@ export function LipMenu({
             <div className="flex items-center gap-3">
               <User className="w-5 h-5" />
               <span>Face</span>
-            </div>
-            <span className="text-xl opacity-60">›</span>
-          </button>
-
-          <button 
-            onClick={onRelaxationClick}
-            className="w-full flex items-center justify-between text-lg"
-          >
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5" />
-              <span>Relaxation & Profile</span>
-            </div>
-            <span className="text-xl opacity-60">›</span>
-          </button>
-
-          <button 
-            onClick={onGenerationClick}
-            className="w-full flex items-center justify-between text-lg"
-          >
-            <div className="flex items-center gap-3">
-              <Wand2 className="w-5 h-5" />
-              <span>Generation</span>
             </div>
             <span className="text-xl opacity-60">›</span>
           </button>

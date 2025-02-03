@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Eye, Smile, Heart, User, Scan, Sparkles, Wand2 } from 'lucide-react';
+import { ChevronLeft, Eye, Smile, Heart, User, Scan } from 'lucide-react';
 import { BlushMenu } from "../cheeks/BlushMenu";
 import { HighlighterMenu } from '../cheeks/HighlighterMenu';
 import { BronzerMenu } from '../cheeks/BronzerMenu';
@@ -10,8 +10,8 @@ interface CheeksMenuProps {
   onEyesClick: () => void;
   onLipClick: () => void;
   onFaceClick: () => void;
-  onRelaxationClick: () => void;
-  onGenerationClick: () => void;
+  // onRelaxationClick: () => void;
+  // onGenerationClick: () => void;
 }
 
 type SubMenu = 'blush' | 'highlighter' | 'bronzer' | null;
@@ -21,8 +21,8 @@ export function CheeksMenu({
   onEyesClick,
   onLipClick,
   onFaceClick,
-  onRelaxationClick,
-  onGenerationClick
+  //onRelaxationClick,
+  //onGenerationClick
 }: CheeksMenuProps) {
   const [currentSubMenu, setCurrentSubMenu] = useState<SubMenu>(null);
 
@@ -118,28 +118,6 @@ export function CheeksMenu({
             <div className="flex items-center gap-3">
               <User className="w-5 h-5" />
               <span>Face</span>
-            </div>
-            <span className="text-xl opacity-60">›</span>
-          </button>
-
-          <button 
-            onClick={onRelaxationClick}
-            className="w-full flex items-center justify-between text-lg"
-          >
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5" />
-              <span>Relaxation & Profile</span>
-            </div>
-            <span className="text-xl opacity-60">›</span>
-          </button>
-
-          <button 
-            onClick={onGenerationClick}
-            className="w-full flex items-center justify-between text-lg"
-          >
-            <div className="flex items-center gap-3">
-              <Wand2 className="w-5 h-5" />
-              <span>Generation</span>
             </div>
             <span className="text-xl opacity-60">›</span>
           </button>
