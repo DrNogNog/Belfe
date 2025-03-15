@@ -15,3 +15,5 @@ Currently looking into the business model and plausibility. (it's complicated)
 Currently rebuilding in React Native (no webcam, iphone camera)
 Future implementations:
 info
+
+#Must download to use
