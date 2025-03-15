@@ -6,3 +6,9 @@ The next steps would be to use blender to add textures to 3d models.
 
 
 To run the code, please type "npm run dev"
+
+This is an recommendation engine, it will use open source recommendation engine system.
+Currently it supports cosmetics.
+I need to update it so that it renders properly.
+Currently looking into the business model and plausibility. (it's complicated)
+
